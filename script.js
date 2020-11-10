@@ -3,23 +3,65 @@ var startPrompt = document.querySelector("#start-prompt");
 var questionContainer = document.querySelector("#question-container");
 var questionText = document.querySelector("#question-text");
 var answerDiv = document.querySelector("#answer");
-var timerCount = document.getElementById("time")
+var countTime = document.getElementById("time").value;
 
 
 
 var questions = [
-    
+      {
+        text: "How long is 1 centimeter in inches?",
+        answers: ["1.54 in", "2.54 in", "2 in", "3 in"],
+        correctIndex: 1,
+    }, 
     {
-        text: "What is my name",
-        answers: ["Brant", "Brandon", "Brandt","Branden"],
+        text: "How many days was JavaScript created in?",
+        answers: ["1","3","7","10"],
+        correctIndex: 3,
+    },
+    {
+        text: "Who created JavaScript?",
+        answers: ["Bill Gates","Elon Mush","Brendan Eich","Mark Zuckerber"],
         correctIndex: 2,
     },
     {
-        text: "Is the sky blue",
-        answers: ["true", "false"],
+        
+        text: "What is the largest mammal?",
+        answers: ["Blue Whale", "Elephant", "Great White Shark","Your Mom"],
         correctIndex: 0,
     },
+    {
+        text: "How many acres was Dwight Schrute's beet farm?",
+        answers:["30","40","50","60"],
+        correctIndex: 3,
+    },
+    {
+        text: "What video game does the Stamford branch in The Office play to help with team building?",
+        answers: ["Call of Duty","Battlefield","Fortnite","Halo"],
+        correctIndex: 0,
+    },
+    {
+        text: "Follow up ----What gun was Jim using on the Carrington Map?",
+        answers: ["M16","MP-40","a sniper rifle","a pistol"],
+        correctIndex: 2,
+    },
+    {
+        text: "What celebrity did Michael Scott think he got a picture of in his condo complex?",
+        answers: ["Steve Martin","Jim Carrey","Will Ferrell","Johnny Depp"],
+        correctIndex: 3,
+    },
+    {
+        text: "What is the worst thing about prison, according to Prison Mike?",
+        answers: ["The food"," the Dementors","Shower time","Gangs"],
+        correctIndex: 1,
+    },
+    {
+        text:"In The Office, what do Dwight and Andy have a duel for?",
+        answers:["A girl","Alpha Male status","A promotion",],
+        correctIndex:0;
+    }
+    
 ];
+
 var questionIndex = 0;
 
 startBtn.addEventListener("click",handleStartClick);
@@ -28,29 +70,33 @@ function handleStartClick(e) {
     startPrompt.style.display = "none";
     questionContainer.style.display = "block";
     renderQuestion();
-  
+    
+
 }
-startBtn.addEventListener("click", startTimer);
-    function startTimer(e){
-        var timeleft = 60
+
+startBtn.addEventListener("click",startTimer)
+function startTimer(e){
+    var timeleft = 60;
     var downloadTimer = setInterval(function(){
-        timeleft--;
-       document.getElementById("time").textContent = timeleft;
-        if(timeleft <= 0)
-            clearInterval(downloadTimer);
-        },1000);
-    }
+    timeleft--;
+    var secondsLeft = `${timeleft}`;
+    console.log(secondsLeft)
+    document.getElementById("time").textContent = timeleft;
+    if(timeleft <= 0)
+        clearInterval(downloadTimer);
+    },1000);
+ 
+}
+
+
+
+
+
+
 
     function renderQuestion(){
         const currentQuestion = questions[questionIndex];
-   var timeleft = 60
-    var downloadTimer = setInterval(function(){
-        timeleft--;
-       document.getElementById("time").textContent = timeleft;
-        if(timeleft <= 0)
-            clearInterval(downloadTimer);
-        },1000);
-  
+
     questionText.textContent = currentQuestion.text;
     for (let i = 0; i < currentQuestion.answers.length; i++) {
         const answer = currentQuestion.answers[i];
@@ -58,9 +104,11 @@ startBtn.addEventListener("click", startTimer);
         btn.setAttribute("class", "btn btn-primary");
         btn.textContent = answer;
         answerDiv.appendChild(btn);
+       
+        }
 
     }
-}
+
 
 answerDiv.addEventListener("click",handleAnswerClick);
 
@@ -72,15 +120,16 @@ function handleAnswerClick(e){
     const question = questions[questionIndex];
     var correctAnswer = question.answers[question.correctIndex]
     if(userAnswer === correctAnswer){
-        console.log("that was correct")
+        console.log("CORRECT!")
 
     }else{
-        console.log("that was incorrect")
+        remainingTime= timeleft-10;
 
     }
     questionIndex++
     renderQuestion();
 }
+
 
 function handleStartClick(e) {
     startPrompt.style.display = "none";
