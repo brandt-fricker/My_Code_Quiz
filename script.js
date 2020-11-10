@@ -63,7 +63,7 @@ var questions = [
 ];
 
 var questionIndex = 0;
-
+var score = 0;
 startBtn.addEventListener("click", handleStartClick);
 
 function handleStartClick(e) {
@@ -81,9 +81,11 @@ function startTimer(e) {
         var secondsLeft = `${timeleft}`;
         console.log(secondsLeft)
         document.getElementById("time").textContent = timeleft;
-        if (timeleft <= 0)
+        if (timeleft <= 0 || timeleft === 0)
             clearInterval(downloadTimer);
-            return;
+            // window.open("score.html")
+             
+            
            
     }, 1000);
    
@@ -120,6 +122,8 @@ function handleAnswerClick(e) {
     if (userAnswer === correctAnswer) {
         
          questionIndex++
+         score+=1
+         
 
     } else {
         timeleft = timeleft-10;
