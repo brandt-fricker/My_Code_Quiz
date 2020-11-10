@@ -3,7 +3,7 @@ var startPrompt = document.querySelector("#start-prompt");
 var questionContainer = document.querySelector("#question-container");
 var questionText = document.querySelector("#question-text");
 var answerDiv = document.querySelector("#answer");
-// var countTime = document.getElementById("time").value;
+
 
 
 
@@ -20,7 +20,7 @@ var questions = [
     },
     {
         text: "Who created JavaScript?",
-        answers: ["Bill Gates", "Elon Mush", "Brendan Eich", "Zuckerberb"],
+        answers: ["Bill Gates", "Elon Mush", "Brendan Eich", "Zuckerberg"],
         correctIndex: 2,
     },
     {
@@ -75,7 +75,7 @@ function handleStartClick(e) {
 var timeleft = 60;
 startBtn.addEventListener("click", startTimer)
 function startTimer(e) {
-    // var timeleft = 60;
+    
     var downloadTimer = setInterval(function () {
         timeleft--;
         var secondsLeft = `${timeleft}`;
@@ -94,6 +94,7 @@ function renderQuestion() {
     const currentQuestion = questions[questionIndex];
 
     questionText.textContent = currentQuestion.text;
+    answerDiv.innerHTML ="";
     for (let i = 0; i < currentQuestion.answers.length; i++) {
         const answer = currentQuestion.answers[i];
         const btn = document.createElement("button");
@@ -117,14 +118,15 @@ function handleAnswerClick(e) {
     const question = questions[questionIndex];
     var correctAnswer = question.answers[question.correctIndex]
     if (userAnswer === correctAnswer) {
-        console.log("CORRECT!")
         
+         questionIndex++
 
     } else {
         timeleft = timeleft-10;
+        questionIndex++
     }
+    
    
-    questionIndex++
    
     renderQuestion();
 }
@@ -142,7 +144,7 @@ function handleStartClick(e) {
         const btn = document.createElement("button");
         btn.setAttribute("class", "btn btn-primary");
         btn.textContent = answer;
-        console.log(btn.textContent)
+        
         answerDiv.appendChild(btn);
 
     }
