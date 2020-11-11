@@ -6,7 +6,7 @@ var answerDiv = document.querySelector("#answer");
 
 
 
-
+var user = document.querySelector("#user")
 var questions = [
     {
         text: "How long is 1 centimeter in inches?",
@@ -61,7 +61,7 @@ var questions = [
     }
 
 ];
-
+var finalQuestionIndex = questions.length;
 var questionIndex = 0;
 var score = 0;
 startBtn.addEventListener("click", handleStartClick);
@@ -75,20 +75,19 @@ function handleStartClick(e) {
 var timeleft = 60;
 startBtn.addEventListener("click", startTimer)
 function startTimer(e) {
-    
+
     var downloadTimer = setInterval(function () {
         timeleft--;
         var secondsLeft = `${timeleft}`;
         console.log(secondsLeft)
         document.getElementById("time").textContent = timeleft;
-        if (timeleft <= 0 || timeleft === 0)
+        if (timeleft <= 0 ){
             clearInterval(downloadTimer);
-            // window.open("score.html")
-             
-            
-           
+            location.href="score.html"
+        
+        }  
     }, 1000);
-   
+
 
 }
 
@@ -96,7 +95,7 @@ function renderQuestion() {
     const currentQuestion = questions[questionIndex];
 
     questionText.textContent = currentQuestion.text;
-    answerDiv.innerHTML ="";
+    answerDiv.innerHTML = "";
     for (let i = 0; i < currentQuestion.answers.length; i++) {
         const answer = currentQuestion.answers[i];
         const btn = document.createElement("button");
@@ -105,7 +104,7 @@ function renderQuestion() {
         answerDiv.appendChild(btn);
 
     }
-    
+   
 }
 
 
@@ -116,23 +115,29 @@ function handleAnswerClick(e) {
 
     if (!e.target.matches("button")) return;
     const userAnswer = e.target.textContent;
-    
+
     const question = questions[questionIndex];
     var correctAnswer = question.answers[question.correctIndex]
     if (userAnswer === correctAnswer) {
-        
-         questionIndex++
-         score+=1
-         
 
-    } else {
-        timeleft = timeleft-10;
         questionIndex++
+        score += 1
+        renderQuestion();
+    } else {
+        if(timeleft >= 10){
+            timeleft = timeleft - 10;
+          questionIndex++  
+          renderQuestion();
+        
+        }else{
+            timeleft = 0;
+            
+        }
+
+        
     }
-    
    
-   
-    renderQuestion();
+
 }
 
 function handleStartClick(e) {
@@ -144,15 +149,18 @@ function handleStartClick(e) {
     questionText.textContent = currentQuestion.text;
     for (let i = 0; i < currentQuestion.answers.length; i++) {
         const answer = currentQuestion.answers[i];
-    
+
         const btn = document.createElement("button");
         btn.setAttribute("class", "btn btn-primary");
         btn.textContent = answer;
-        
+
         answerDiv.appendChild(btn);
 
     }
-}    
-    
-    
+}
+
+function saveScore(){
+
+}
+
 

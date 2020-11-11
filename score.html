@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIGHSCORES</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Highscores</title>
 </head>
+
 <body>
-    <script src="script.js"></script>
+    <!-- Highscore Display section -->
+    <section id="highscore-section" class="hide">
+        <div class="row">
+            <div id="high-score" class="col-md-12">
+                <h3>Your final score is <span id="final-score">0</span></h3>
+                <label for="initials-area">Enter initials:</label>
+                <input type="text" name="initials-area" maxlength="3" id="initials">
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
+        </div>
+    </section>
 </body>
-</html>
+<script type="text/javascript" src="highscore.js"></script>
+
+</html> 
