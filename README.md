@@ -1,1 +1,2 @@
 # My_Code_Quiz
+The quiz presented is a timed quiz. You will have 60 seconds to complete or finish as many questions as you can. Don't worry, the quiz only contains 10 questions....But, if you answer incorrectly you will notice that the timer subtracts 10 seconds away from your overall time remaining. Ideally the quiz will terminate when either you have completed all the questions and/or you run out of time. You will then be taken to the highscore page to add your intials to the highscore board. 
